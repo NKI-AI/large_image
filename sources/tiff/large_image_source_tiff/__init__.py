@@ -82,6 +82,10 @@ class TiffFileTileSource(FileTileSource):
         """
         super(TiffFileTileSource, self).__init__(path, **kwargs)
 
+        # result = self._initWithTiffTools()
+        # if result is not False:
+        #     return
+
         largeImagePath = self._getLargeImagePath()
         self._largeImagePath = largeImagePath
         try:

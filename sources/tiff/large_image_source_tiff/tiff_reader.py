@@ -17,6 +17,7 @@
 ###############################################################################
 
 import ctypes
+import json
 import math
 import numpy
 import os
@@ -820,6 +821,15 @@ class TiledTiffDirectory(object):
             return
         if not isinstance(meta, six.string_types):
             meta = meta.decode('utf8', 'ignore')
+        # DWM::
+        # handle this
+        try:
+            parsed = json.loads(meta)
+            if isinstance(parsed, dict) and 'large_image_converter' in parsed:
+                self._description_record = parsed['large_image_converter']
+                return True
+        except Exception:
+            pass
         try:
             xml = ElementTree.fromstring(meta)
         except Exception:

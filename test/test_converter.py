@@ -122,7 +122,8 @@ def testConvertOMETif(tmpdir):
     # Note: change this when we convert multi-frame files differently
     large_image_converter.convert(imagePath, outputPath)
     info = tifftools.read_tiff(outputPath)
-    assert len(info['ifds']) == 5
+    assert len(info['ifds']) == 3
+    assert len(info['ifds'][0]['tags'][tifftools.Tag.SubIFD.value]['ifds']) == 4
 
 
 def testConvertTiffFloatPixels(tmpdir):
